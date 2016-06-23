@@ -1,6 +1,6 @@
 {
   "version": "1.0.0-*",
-  "compilationOptions": {
+  "buildOptions": {
     "emitEntryPoint": true
   },
   "tooling": {
@@ -38,14 +38,10 @@
       }
     }
   },
-
-  "exclude": [
-    "wwwroot",
-    "node_modules",
-    "bower_components"
-  ],
-  "publishExclude": [
-    "**.user",
-    "**.vspscc"
-  ]
+  "publishOptions": {
+    "exclude": [
+      "**.user",
+      "**.vspscc"
+    ]
+  }
 }
