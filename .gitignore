@@ -135,3 +135,5 @@ samples/client/petstore/typescript-angular/**/typings
 samples/client/petstore/typescript-fetch/**/dist/
 samples/client/petstore/typescript-fetch/**/typings
 
+*.suo
+samples/server/petstore/aspnetcore1/.vs/PetStore/v14/.suo

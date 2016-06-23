@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.SwaggerGen.Generator;
 
 namespace IO.Swagger
 {
@@ -17,7 +18,7 @@ namespace IO.Swagger
         private readonly IHostingEnvironment _hostingEnv;
         private readonly ApplicationEnvironment _appEnv;
 
-        public Startup(IHostingEnvironment env, ApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env, Microsoft.Extensions.PlatformAbstractions.ApplicationEnvironment appEnv)
         {
             _hostingEnv = env;
             _appEnv = appEnv;
@@ -34,9 +35,8 @@ namespace IO.Swagger
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string xmlComments = string.Format(@"{0}{4}artifacts{4}{1}{4}{2}{3}{4}IO.Swagger.xml",
+            string xmlComments = string.Format(@"{0}{3}artifacts{3}{3}{1}{2}{3}IO.Swagger.xml",
                    GetSolutionBasePath(),
-                   _appEnv.Configuration,
                    _appEnv.RuntimeFramework.Identifier.ToLower(),
                    _appEnv.RuntimeFramework.Version.ToString().Replace(".", string.Empty),
                    Path.DirectorySeparatorChar);
@@ -51,7 +51,7 @@ namespace IO.Swagger
             // services.AddWebApiConventions();
 
             services.AddSwaggerGen();
-            services.ConfigureSwaggerDocument(options =>
+            services.ConfigureSwaggerGen(options =>
             {
                 options.SingleApiVersion(new Info
                 {
@@ -60,19 +60,19 @@ namespace IO.Swagger
                     Description = "IO.Swagger (ASP.NET 5 Web API 2.x)"
                 });
                 
-                options.OperationFilter(new ApplyXmlActionCommentsFixed(xmlComments));
+                //options.OperationFilter(new ApplyXmlActionCommentsFixed(xmlComments));
             });
 
-            services.ConfigureSwaggerSchema(options => { 
-                options.DescribeAllEnumsAsStrings = true; 
-                options.ModelFilter(new ApplyXmlTypeCommentsFixed(xmlComments));
-            });
+            //services.ConfigureSwaggerGen(options => {
+            //    options.DescribeAllEnumsAsStrings = true; 
+            //    options.ModelFilter(new ApplyXmlTypeCommentsFixed(xmlComments));
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.MinimumLevel = LogLevel.Information;
+            //loggerFactory. .MinimumLevel = LogLevel.Information;
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -80,11 +80,11 @@ namespace IO.Swagger
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            
+            //app.UseMvc();
 
-            app.UseMvc();
-
-            app.UseSwaggerGen();
-            app.UseSwaggerUi();
+            //app.UseSwaggerGen();
+            //app.UseSwaggerUi();
         }
 
         // Taken from https://github.com/domaindrivendev/Ahoy/blob/master/test/WebSites/Basic/Startup.cs
@@ -102,6 +102,6 @@ namespace IO.Swagger
         }
 
         // Entry point for the application.
-        public static void Main(string[] args) => WebHost.Run<Startup>(args);
+        public static void Main(string[] args) => WebApplication.Run<Startup>(args);
     }
 }
