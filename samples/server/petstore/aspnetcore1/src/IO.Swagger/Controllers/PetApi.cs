@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using IO.Swagger.Models;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.Swagger.Annotations;
+using Swashbuckle.SwaggerGen.Annotations;
 
 namespace IO.Swagger.Controllers
 { 

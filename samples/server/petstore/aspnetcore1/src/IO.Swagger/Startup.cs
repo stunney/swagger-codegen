@@ -15,9 +15,9 @@ namespace IO.Swagger
     public class Startup
     {
         private readonly IHostingEnvironment _hostingEnv;
-        private readonly IApplicationEnvironment _appEnv;
+        private readonly ApplicationEnvironment _appEnv;
 
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env, ApplicationEnvironment appEnv)
         {
             _hostingEnv = env;
             _appEnv = appEnv;

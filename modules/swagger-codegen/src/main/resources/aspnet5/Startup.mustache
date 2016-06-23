@@ -18,7 +18,7 @@ namespace {{packageName}}
         private readonly IHostingEnvironment _hostingEnv;
         private readonly IApplicationEnvironment _appEnv;
 
-        public Startup(IHostingEnvironment env, IApplicationEnvironment appEnv)
+        public Startup(IHostingEnvironment env, ApplicationEnvironment appEnv)
         {
             _hostingEnv = env;
             _appEnv = appEnv;
@@ -104,33 +104,5 @@ namespace {{packageName}}
 
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
-    }
-    
-        
-    //  using Swashbuckle.SwaggerGen.XmlComments;
-    public class ApplyXmlTypeCommentsFixed : ApplyXmlTypeComments
-    {
-        public ApplyXmlTypeCommentsFixed() : base("")
-        {
-            throw new NotImplementedException();
-        }
-
-        public ApplyXmlTypeCommentsFixed(string filePath): base(filePath)
-        {
-
-        }
-    }
-
-    public class ApplyXmlActionCommentsFixed : ApplyXmlActionComments
-    {
-        public ApplyXmlActionCommentsFixed() : base("")
-        {
-            throw new NotImplementedException();
-        }
-
-        public ApplyXmlActionCommentsFixed(string filePath): base(filePath)
-        {
-
-        }
     }
 }
