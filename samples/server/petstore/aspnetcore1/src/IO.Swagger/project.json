@@ -1,27 +1,30 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "debugType": "portable",
+    "optimize": true,
   },
   "tooling": {
     "defaultNamespace": "IO.Swagger"
   },
 
   "dependencies": {
-    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-*",
-    "Microsoft.AspNet.Server.Kestrel": "1.0.0-*",
-    "Microsoft.AspNet.StaticFiles": "1.0.0-*",
     "Microsoft.AspNetCore.Hosting": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
-    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-*",
-    "Microsoft.Extensions.DependencyModel": "1.0.0-*",
-    "Microsoft.Extensions.Logging": "1.0.0-*",
-    "Microsoft.Extensions.Logging.Console": "1.0.0-*",
-    "Microsoft.Extensions.Logging.Debug": "1.0.0-*",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-*",
+    "Microsoft.Extensions.DependencyModel": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
     "Swashbuckle.SwaggerGen": "6.0.0-beta9",
-    "Swashbuckle.SwaggerUi": "6.0.0-beta9"
+    "Swashbuckle.SwaggerUi": "6.0.0-beta9",
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-*",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-*",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-*",
+    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc1-final"
   },
 
   "commands": {
@@ -29,19 +32,58 @@
   },
 
   "frameworks": {
-    "dnx451": {
-      "dependencies": {
-      }
-    },
-    "dnxcore50": {
-      "dependencies": {
-      }
-    }
+    "netcoreapp1.0": {},
+    //"dnx451": {
+    //  "dependencies": {
+    //  }
+    //},
+    //"net451": {
+    //  "dependencies": {
+    //  },
+    //  "imports": [
+
+    //  ]
+    //},
+    //"netcoreapp1.0": {
+    //  "dependencies": {
+    //    "Microsoft.NETCore.App": {
+    //      "type": "platform",
+    //      "version": "1.0.0-*"
+    //    }
+    //  },
+    //  "imports": [
+    //    "portable-net45+wp80+win8+wpa81+dnxcore50",
+    //    "portable-net45+win8+wp8+wpa81",
+    //    "portable-net45+win8+wp8"
+    //  ]
+    //}
+    //"netcoreapp1.0": {
+    //  "dependencies": {
+    //  },
+    //  "imports": [
+    //    "dotnet5.6",
+    //    "dnxcore50",
+    //    "portable-net45+win8",
+    //    "portable-net45+wp80+win8+wpa81+dnxcore50",
+    //    "portable-net45+win8+wp8+wpa81",
+    //    "portable-net45+win8+wp8",
+    //  ]
+    //}
+  },
+  "runtimes": {
+    "win81-x64": { },
+    "win7-x64": { },
   },
   "publishOptions": {
     "exclude": [
       "**.user",
       "**.vspscc"
+    ],
+    "include": [
+      "wwwroot",
+      "Views",
+      "appsettings.json",
+      "web.config"
     ]
   }
 }

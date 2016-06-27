@@ -1,30 +1,27 @@
 using System;
 using System.IO;
 using System.Linq;
-using Microsoft.AspNet.Builder;
-using Microsoft.AspNet.Hosting;
-using Microsoft.AspNetCore.Hosting.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
-using Newtonsoft.Json.Serialization;
 using Swashbuckle.SwaggerGen.Generator;
 
 namespace IO.Swagger
 {
     public class Startup
     {
-        private readonly IHostingEnvironment _hostingEnv;
+        private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnv;
         private readonly ApplicationEnvironment _appEnv;
 
-        public Startup(IHostingEnvironment env, Microsoft.Extensions.PlatformAbstractions.ApplicationEnvironment appEnv)
+        public Startup(Microsoft.AspNetCore.Hosting.IHostingEnvironment env, Microsoft.Extensions.PlatformAbstractions.ApplicationEnvironment appEnv)
         {
             _hostingEnv = env;
             _appEnv = appEnv;
 
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
@@ -70,7 +67,7 @@ namespace IO.Swagger
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             //loggerFactory. .MinimumLevel = LogLevel.Information;
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
