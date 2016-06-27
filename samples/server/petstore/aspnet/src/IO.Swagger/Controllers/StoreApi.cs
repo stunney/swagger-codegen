@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
-using IO.Swagger.Models;
 using Microsoft.AspNetCore.Mvc;
-using Swashbuckle.SwaggerGen.Annotations;
+using Swashbuckle.Swagger.Annotations;
+using IO.Swagger.Models;
 
 namespace IO.Swagger.Controllers
 { 

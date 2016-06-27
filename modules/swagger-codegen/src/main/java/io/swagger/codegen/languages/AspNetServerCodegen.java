@@ -1,6 +1,7 @@
 package io.swagger.codegen.languages;
 
 import io.swagger.codegen.*;
+import io.swagger.codegen.CodegenConstants;
 import io.swagger.models.properties.*;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -9,14 +10,16 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.*;
 
-public class AspNetCore1ServerCodegen extends AbstractCSharpCodegen {
+public class AspNetServerCodegen extends AbstractCSharpCodegen {
 
     protected String sourceFolder = "src" + File.separator + packageName;
 
+	protected String packageGuid = "{" + java.util.UUID.randomUUID().toString().toUpperCase() + "}";
+	
     @SuppressWarnings("hiding")
-    protected Logger LOGGER = LoggerFactory.getLogger(AspNetCore1ServerCodegen.class);
+    protected Logger LOGGER = LoggerFactory.getLogger(AspNetServerCodegen.class);
 
-    public AspNetCore1ServerCodegen() {
+    public AspNetServerCodegen() {
         super();
 
         outputFolder = "generated-code" + File.separator + this.getName();
@@ -69,12 +72,12 @@ public class AspNetCore1ServerCodegen extends AbstractCSharpCodegen {
 
     @Override
     public String getName() {
-        return "aspnetcore1";
+        return "aspnet";
     }
 
     @Override
     public String getHelp() {
-        return "Generates an ASP.NET Core 1.0 Web API server.";
+        return "Generates an ASP.NET Core Web API server.";
     }
 
     @Override
@@ -84,6 +87,12 @@ public class AspNetCore1ServerCodegen extends AbstractCSharpCodegen {
         apiPackage = packageName + ".Controllers";
         modelPackage = packageName + ".Models";
 
+		if (additionalProperties.containsKey(CodegenConstants.OPTIONAL_PROJECT_GUID)) {
+            setPackageGuid((String) additionalProperties.get(CodegenConstants.OPTIONAL_PROJECT_GUID));
+        }
+        additionalProperties.put("packageGuid", packageGuid);
+
+		
         supportingFiles.add(new SupportingFile("global.json", "", "global.json"));
         supportingFiles.add(new SupportingFile("build.mustache", "", "build.sh"));
         supportingFiles.add(new SupportingFile("Dockerfile.mustache", this.sourceFolder, "Dockerfile"));
@@ -92,6 +101,7 @@ public class AspNetCore1ServerCodegen extends AbstractCSharpCodegen {
 
         supportingFiles.add(new SupportingFile("project.mustache", this.sourceFolder, "project.json"));
         supportingFiles.add(new SupportingFile("Startup.mustache", this.sourceFolder, "Startup.cs"));
+		supportingFiles.add(new SupportingFile("xproj.mustache", this.sourceFolder, packageName + ".xproj"));
 
         supportingFiles.add(new SupportingFile("Properties" + File.separator + "launchSettings.json", this.sourceFolder + File.separator + "Properties", "launchSettings.json"));
 
@@ -125,5 +135,9 @@ public class AspNetCore1ServerCodegen extends AbstractCSharpCodegen {
 
         // Converts, for example, PUT to HttpPut for controller attributes
         operation.httpMethod = "Http" + operation.httpMethod.substring(0, 1) + operation.httpMethod.substring(1).toLowerCase();
+    }
+	
+	public void setPackageGuid(String packageGuid) {
+        this.packageGuid = packageGuid;
     }
 }

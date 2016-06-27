@@ -5,14 +5,14 @@ import io.swagger.codegen.CodegenConstants;
 
 import java.util.Map;
 
-public class AspNetCore1ServerOptionsProvider implements OptionsProvider {
-    public static final String PACKAGE_NAME_VALUE = "swagger_server_aspnetcore1";
+public class AspNetServerOptionsProvider implements OptionsProvider {
+    public static final String PACKAGE_NAME_VALUE = "swagger_server_aspnet";
     public static final String PACKAGE_VERSION_VALUE = "1.0.0-SNAPSHOT";
-    public static final String SOURCE_FOLDER_VALUE = "src_aspnetcore1";
+    public static final String SOURCE_FOLDER_VALUE = "src_aspnet";
 	
     @Override
     public String getLanguage() {
-        return "aspnetcore1";
+        return "aspnet";
     }
 
     @Override

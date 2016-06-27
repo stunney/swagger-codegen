@@ -1,19 +1,19 @@
-package io.swagger.codegen.aspnetcore1;
+package io.swagger.codegen.aspnet;
 
 import io.swagger.codegen.AbstractOptionsTest;
 import io.swagger.codegen.CodegenConfig;
-import io.swagger.codegen.languages.AspNetCore1ServerCodegen;
-import io.swagger.codegen.options.AspNetCore1ServerOptionsProvider;
+import io.swagger.codegen.languages.AspNetServerCodegen;
+import io.swagger.codegen.options.AspNetServerOptionsProvider;
 import mockit.Expectations;
 import mockit.Tested;
 
-public class AspNetCore1ServerOptionsTest extends AbstractOptionsTest {
+public class AspNetServerOptionsTest extends AbstractOptionsTest {
 
     @Tested
-    private AspNetCore1ServerCodegen serverCodegen;
+    private AspNetServerCodegen serverCodegen;
 
-    public AspNetCore1ServerOptionsTest() {
-        super(new AspNetCore1ServerOptionsProvider());
+    public AspNetServerOptionsTest() {
+        super(new AspNetServerOptionsProvider());
     }
 
     @Override
@@ -25,11 +25,11 @@ public class AspNetCore1ServerOptionsTest extends AbstractOptionsTest {
     @Override
     protected void setExpectations() {
         new Expectations(serverCodegen) {{
-            serverCodegen.setPackageName(AspNetCore1ServerOptionsProvider.PACKAGE_NAME_VALUE);
+            serverCodegen.setPackageName(AspNetServerOptionsProvider.PACKAGE_NAME_VALUE);
             times = 1;
-            serverCodegen.setPackageVersion(AspNetCore1ServerOptionsProvider.PACKAGE_VERSION_VALUE);
+            serverCodegen.setPackageVersion(AspNetServerOptionsProvider.PACKAGE_VERSION_VALUE);
             times = 1;
-            serverCodegen.setSourceFolder(AspNetCore1ServerOptionsProvider.SOURCE_FOLDER_VALUE);
+            serverCodegen.setSourceFolder(AspNetServerOptionsProvider.SOURCE_FOLDER_VALUE);
             times = 1;
             serverCodegen.useDateTimeOffset(true);
             times = 1;
